@@ -1,0 +1,41 @@
+<div class="booking-page">
+  <div class="booking-card" *ngIf="vehicle">
+    <div class="vehicle-preview">
+      <img [src]="vehicle.imageUrl" [alt]="vehicle.brand" />
+      <div class="preview-info">
+        <h2>{{ vehicle.brand }} {{ vehicle.model }}</h2>
+        <span class="badge">{{ vehicle.category }}</span>
+        <p class="rate">
+          Rate: <strong>${{ vehicle.dailyRate }}</strong> / day
+        </p>
+      </div>
+    </div>
+
+    <div class="booking-form">
+      <h3>Select Rental Dates</h3>
+      <div class="input-grid">
+        <div class="form-group">
+          <label>Pick-up Date</label>
+          <input type="date" [(ngModel)]="startDate" (change)="calculateTotal()" [min]="today" />
+        </div>
+
+        <div class="form-group">
+          <label>Return Date</label>
+          <input type="date" [(ngModel)]="endDate" (change)="calculateTotal()" [min]="startDate" />
+        </div>
+      </div>
+
+      <div class="total-display" *ngIf="totalPrice > 0">
+        <div class="divider"></div>
+        <div class="total-row">
+          <span>Total Amount</span>
+          <span class="price">${{ totalPrice }}</span>
+        </div>
+      </div>
+
+      <button class="confirm-btn" [disabled]="totalPrice <= 0" (click)="onConfirmBooking()">
+        Confirm Reservation
+      </button>
+    </div>
+  </div>
+</div>

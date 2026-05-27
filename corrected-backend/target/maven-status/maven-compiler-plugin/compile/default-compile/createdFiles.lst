@@ -1,0 +1,14 @@
+com\carrental\CarRentalApplication.class
+com\carrental\controller\BookingController.class
+com\carrental\repository\CarRepository.class
+com\carrental\controller\CarController.class
+com\carrental\model\Car.class
+com\carrental\controller\UserController.class
+com\carrental\config\WebMvcConfig.class
+com\carrental\controller\SpaController.class
+com\carrental\repository\BookingRepository.class
+com\carrental\controller\AuthController.class
+com\carrental\config\CorsConfig.class
+com\carrental\model\Booking.class
+com\carrental\repository\UserRepository.class
+com\carrental\model\User.class

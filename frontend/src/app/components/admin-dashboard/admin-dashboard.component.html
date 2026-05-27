@@ -1,0 +1,97 @@
+<!-- File: src/app/components/admin-dashboard/admin-dashboard.component.html -->
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage your car rental system</p>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="dashboard-stats">
+    <div class="stat-card">
+      <div class="stat-icon vehicles">
+        <i class="fas fa-car"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ totalVehicles }}</h3>
+        <p>Total Vehicles</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon bookings">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ totalBookings }}</h3>
+        <p>Total Bookings</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon active">
+        <i class="fas fa-play-circle"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ activeBookings }}</h3>
+        <p>Active Bookings</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon revenue">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="stat-content">
+        <h3>${{ revenue.toFixed(2) }}</h3>
+        <p>Total Revenue</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Actions -->
+  <div class="dashboard-actions">
+    <!-- ONLY ADMIN CAN SEE THESE BUTTONS -->
+    <button (click)="goToAddCar()" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Add New Car
+    </button>
+    <button (click)="goToBookings()" class="btn btn-secondary">
+      <i class="fas fa-list"></i> View All Bookings
+    </button>
+    <button (click)="goToVehicles()" class="btn btn-secondary">
+      <i class="fas fa-cog"></i> Manage Vehicles
+    </button>
+  </div>
+
+  <!-- Recent Bookings -->
+  <div class="dashboard-section" *ngIf="recentBookings.length > 0">
+    <h2>Recent Bookings</h2>
+    <div class="recent-bookings">
+      <table>
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <!-- <th>Vehicle</th>
+            <th>Customer</th> -->
+            <th>Dates</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of recentBookings">
+            <td>#{{ booking.id }}</td>
+            <!-- <td>{{ booking.vehicle?.brand }} {{ booking.vehicle?.model }}</td>
+            <td>{{ booking.user?.firstName }} {{ booking.user?.lastName }}</td> -->
+            <td>{{ booking.startDate }} to {{ booking.endDate }}</td>
+            <td>${{ booking.totalCost }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="booking.status?.toLowerCase()">
+                {{ booking.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="browse-container">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Find Your Perfect Ride</h1>
+      <p class="hero-subtitle">Choose from our premium selection of vehicles</p>
+    </div>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <div class="filter-container">
+      <div class="search-box">
+        <svg
+          class="search-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="applyFilters()"
+          placeholder="Search by brand or model..."
+          class="search-input"
+        />
+      </div>
+
+      <select
+        [(ngModel)]="selectedType"
+        (change)="applyFilters()"
+        class="filter-select"
+      >
+        <option value="">All Types</option>
+        <option *ngFor="let type of vehicleTypes" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+
+      <select
+        [(ngModel)]="selectedBrand"
+        (change)="applyFilters()"
+        class="filter-select"
+      >
+        <option value="">All Brands</option>
+        <option *ngFor="let brand of brands" [value]="brand">
+          {{ brand }}
+        </option>
+      </select>
+
+      <button (click)="clearFilters()" class="clear-btn">Clear Filters</button>
+    </div>
+  </div>
+
+  <!-- Vehicle Grid -->
+  <div class="vehicles-section">
+    <div class="results-header">
+      <h2>Available Vehicles</h2>
+      <span class="results-count"
+        >{{ filteredVehicles.length }} cars found</span
+      >
+    </div>
+
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading vehicles...</p>
+    </div>
+
+    <div
+      *ngIf="!isLoading && filteredVehicles.length === 0"
+      class="empty-state"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path
+          d="M9.172 9.172a4 4 0 015.656 5.656M9.172 9.172L5.29 5.29m3.883 3.883l10.607 10.607M9.172 9.172a4 4 0 000 5.656m5.656-5.656a4 4 0 015.656 0"
+        />
+      </svg>
+      <h3>No vehicles found</h3>
+      <p>Try adjusting your filters</p>
+    </div>
+
+    <div class="vehicle-grid" *ngIf="!isLoading && filteredVehicles.length > 0">
+      <div *ngFor="let vehicle of filteredVehicles" class="vehicle-card">
+        <div class="vehicle-image">
+          <img
+            [src]="
+              vehicle.imageUrl ||
+              'https://via.placeholder.com/400x250?text=Car+Image'
+            "
+            [alt]="vehicle.brand + ' ' + vehicle.model"
+          />
+          <div class="vehicle-badge">{{ vehicle.type }}</div>
+          <h3 class="vehicle-name">{{ vehicle.brand }} {{ vehicle.model }}</h3>
+
+          <img
+            [src]="vehicle.imageUrl || 'assets/images/bmw.png'"
+            [alt]="vehicle.brand + ' ' + vehicle.model"
+            class="vehicle-img"
+          />
+        </div>
+
+        <div class="vehicle-content">
+          <div class="vehicle-header">
+            <h3 class="vehicle-name">
+              {{ vehicle.brand }} {{ vehicle.model }}
+            </h3>
+            <span class="vehicle-year">{{ vehicle.year }}</span>
+          </div>
+
+          <p class="vehicle-description">{{ vehicle.description }}</p>
+
+          <div class="vehicle-specs">
+            <div class="spec-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg>
+              <span>{{ vehicle.seats }} Seats</span>
+            </div>
+            <div class="spec-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span>{{ vehicle.transmission }}</span>
+            </div>
+            <div class="spec-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 2v20M2 12h20" />
+              </svg>
+              <span>{{ vehicle.fuelType }}</span>
+            </div>
+          </div>
+
+          <div class="vehicle-footer">
+            <div class="price-section">
+              <span class="price">${{ vehicle.dailyRate }}</span>
+              <span class="price-label">/day</span>
+            </div>
+            <button (click)="bookNow(vehicle.id!)" class="book-btn">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

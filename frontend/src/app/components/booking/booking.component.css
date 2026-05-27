@@ -1,0 +1,83 @@
+.booking-page {
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-card {
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.vehicle-preview {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 2rem;
+  border-right: 1px solid #eee;
+}
+
+.vehicle-preview img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.booking-form {
+  flex: 1.2;
+  padding: 2rem;
+  color: #333;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.total-display {
+  margin-top: 2rem;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.confirm-btn {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.confirm-btn:disabled {
+  background: #ccc;
+}
